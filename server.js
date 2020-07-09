@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Configuring the database
-const dbConfig = require("./config/database.config.js");
+const dbConfig = require("./src/config/database.config.js");
 const mongoose = require("mongoose");
 
 mongoose.Promise = global.Promise;
@@ -24,12 +24,12 @@ mongoose.set("useUnifiedTopology", true);
 // Connecting to the database
 mongoose
   .connect(dbConfig.url, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
   })
   .then(() => {
     console.log("Successfully connected to the database");
   })
-  .catch(err => {
+  .catch((err) => {
     console.log("Could not connect to the database. Exiting now...", err);
     process.exit();
   });
@@ -38,18 +38,18 @@ mongoose
 app.get("/", (req, res) => {
   res.json({
     message:
-      "Welcome to EasyNotes application. Take notes quickly. Organize and keep track of all your notes."
+      "Welcome to EasyNotes application. Take notes quickly. Organize and keep track of all your notes.",
   });
 });
 
-require("./app/routes/note.routes.js")(app);
+require("./src/routes/note.routes.js")(app);
 
 app.use(
   cors({
-    origin: "*"
+    origin: "*",
   })
 );
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -60,6 +60,6 @@ app.use(function(req, res, next) {
 
 // listen for requests
 const port = process.env.PORT || 3000;
-app.listen(port, function() {
+app.listen(port, function () {
   console.log("Server Lisening On Port : " + port);
 });

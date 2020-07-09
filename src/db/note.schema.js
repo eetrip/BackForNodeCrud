@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const NoteSchema = mongoose.Schema(
   {
     title: String,
-    content: String
+    content: String,
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
